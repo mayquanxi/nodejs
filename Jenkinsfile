@@ -17,7 +17,7 @@ pipeline {
               }
               stage('Test code') {
                     steps {
-                         sh 'node ./app.js & sleep 10'
+                         sh 'node ./app.js & sleep 60'
                          input message: 'Finished using the web site? (Click "Proceed" to continue)'        
                     }     
               }
