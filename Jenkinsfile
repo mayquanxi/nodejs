@@ -21,7 +21,7 @@ pipeline {
                     steps {
                       echo "This is TEST stage"
                       echo ""
-                      sh 'npm test'
+                    
                       sh 'npm start & sleep 5'
                       sh 'echo $! >./pidfile'
                       echo 'address apps: http://127.0.0.1:3000'
