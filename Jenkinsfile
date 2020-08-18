@@ -24,6 +24,7 @@ pipeline {
                     
                       sh 'npm start & sleep 5'
                       sh 'echo $! >./pidfile'
+                      sh 'ls -l'
                       echo 'address apps: http://127.0.0.1:3000'
                       input message: 'Finished using the web site? (Click "Proceed" to continue)'
                       sh 'kill $(cat ./pidfile)'
