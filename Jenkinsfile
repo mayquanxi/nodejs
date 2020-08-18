@@ -6,19 +6,27 @@ pipeline {
               }
         }
         triggers {
-              pollSCM('H H(8-17)/2 * 1-11 1-5')
+              pollSCM('H  H(6-18)/2 * * 1-6')
+        }
         }
         stages {
-              stage('build') {
+              stage('build and install dependences') {
                     steps {
-                         echo 'check version nodejs:'
-                         sh 'node --version'
+                      echo "THis is BUILD stage"
+                      echo ""
+                      sh 'npm install'
                     }
               }
-              stage('Test code') {
+              stage('Test') {
                     steps {
-                         sh 'node ./app.js & sleep 60'
-                         input message: 'Finished using the web site? (Click "Proceed" to continue)'        
+                      echo "This is TEST stage"
+                      echo ""
+                      sh 'npm test'
+                      sh 'npm start & sleep 5'
+                      sh 'echo $! >./pidfile'
+                      echo 'address apps: http://127.0.0.1:3000'
+                      input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                      sh 'kill $(cat ./pidfile)'
                     }     
               }
         }
