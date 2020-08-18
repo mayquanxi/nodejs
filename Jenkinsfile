@@ -2,12 +2,12 @@ pipeline {
         agent {
               docker {
                     image 'node:12'
+                    label 'akali'
                     args '-p 3000:3000'
               }
         }
         triggers {
               pollSCM('H  H(6-18)/2 * * 1-6')
-        }
         }
         stages {
               stage('build and install dependences') {
