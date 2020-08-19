@@ -25,15 +25,14 @@ pipeline {
                       sh 'ls -l'
                       echo 'address apps: http://127.0.0.1:3000'
                       input {
-                        message 'Finished using the web site? (Click Proceed to continue)'
-                        parameters {
-                          string(name: 'NAME', defaultValue: 'NGUYEN VAN A', description: 'name of person submit for project')
-                          string(name: 'DEPARTMENT', defaultValue: 'IT', description: 'name department of person submit for project')
-                          text(name:'USER', description: 'User login jenkins pipline')
-                          password(name: 'PASSWORD', description: 'password user login')
-                        }
+                          message "Should we continue?"
+                          ok "Yes, we should."
+                          submitter "alice,bob"
+                          parameters {
+                              string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                          }
                       }
-                      echo 'you are ${params.NAME} department ${params.DEPARTMENT} submit this project'
+                      
                       
                     }     
               }
