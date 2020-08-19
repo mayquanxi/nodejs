@@ -34,8 +34,8 @@ pipeline {
                           text(name:'USER', description: 'User login jenkins pipline')
                           password(name: 'PASSWORD', description: 'password user login')
                         }
-                        echo 'you are ${params.NAME} department ${params.DEPARTMENT} submit this project'
                       }
+                      echo 'you are ${params.NAME} department ${params.DEPARTMENT} submit this project'
                       
                     }     
               }
