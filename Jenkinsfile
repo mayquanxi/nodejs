@@ -24,7 +24,18 @@ pipeline {
                       sh 'npm start & sleep 5'
                       sh 'ls -l'
                       echo 'address apps: http://127.0.0.1:3000'
-                      input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                      input {
+                        message 'Finished using the web site? (Click "Proceed" to continue)'
+                        ok  'Yes, continue'
+                        submitter 'Abort'
+                        parameters {
+                          string(name: 'NAME', defaultValue: 'NGUYEN VAN A', description: 'name of person submit for project')
+                          string(name: 'DEPARTMENT', defaultValue: 'IT', description: 'name department of person submit for project')
+                          text(name:'USER', description: 'User login jenkins pipline')
+                          password(name: 'PASSWORD', description: 'password user login')
+                        }
+                        echo 'you are ${params.NAME} department ${params.DEPARTMENT} submit this project'
+                      }
                       
                     }     
               }
