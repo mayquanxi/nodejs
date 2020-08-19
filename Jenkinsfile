@@ -18,21 +18,25 @@ pipeline {
                     }
               }
               stage('Test') {
+                    input {
+                      message 'Enter parameters for project'
+                        ok 'Okey, continue'
+                        submitter 'MRA'
+                        parameters {
+                          string(name: 'NAME', defaultValue: 'NGUYEN VAN A', description: 'name of person submit for project')
+                          string(name: 'DEPARTMENT', defaultValue: 'IT', description: 'name department of person submit for project')
+                          text(name:'USER', description: 'User login jenkins pipline')
+                          password(name: 'PASSWORD', description: 'password user login')
+                        }
+                      }
                     steps {
                       echo "This is TEST stage"
                       echo ""
                       sh 'npm start & sleep 5'
                       sh 'ls -l'
                       echo 'address apps: http://127.0.0.1:3000'
-                    }
-                    input {
-                      message "Should we continue?"
-                      ok "Yes, we should."
-                      submitter "alice,bob"
-                      parameters {
-                        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                          }
-                      }     
+                      input message: 'Check webserver first to continue'
+                    }     
               }
         }
 }
