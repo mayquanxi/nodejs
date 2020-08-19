@@ -18,6 +18,13 @@ pipeline {
                     }
               }
               stage('Test') {
+                    steps {
+                      echo "This is TEST stage"
+                      echo ""
+                      sh 'npm start & sleep 5'
+                      sh 'ls -l'
+                      echo 'address apps: http://127.0.0.1:3000'
+                    }
                     input {
                       message "Should we continue?"
                       ok "Yes, we should."
@@ -25,14 +32,7 @@ pipeline {
                       parameters {
                         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
                           }
-                      }
-                    steps {
-                      echo "This is TEST stage"
-                      echo ""
-                      sh 'npm start & sleep 5'
-                      sh 'ls -l'
-                      echo 'address apps: http://127.0.0.1:3000'
-                    }     
+                      }     
               }
         }
 }
