@@ -25,9 +25,7 @@ pipeline {
                       sh 'ls -l'
                       echo 'address apps: http://127.0.0.1:3000'
                       input {
-                        message "Finished using the web site? (Click Proceed to continue)"
-                        ok  "Yes, continue"
-                        submitter "Abort"
+                        message: 'Finished using the web site? (Click Proceed to continue)'
                         parameters {
                           string(name: 'NAME', defaultValue: 'NGUYEN VAN A', description: 'name of person submit for project')
                           string(name: 'DEPARTMENT', defaultValue: 'IT', description: 'name department of person submit for project')
