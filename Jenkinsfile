@@ -6,10 +6,23 @@ pipeline {
                     args '-p 3000:3000'
               }
         }
+        environment {
+            scannerhome = tool 'sonarqubescanner'
+        }
         triggers {
               pollSCM('H  H(6-18)/2 * * 1-6')
         }
         stages {
+              stage('Sonarscanner') {
+                  steps {
+                      withSonarQubeEnv('sonarqubeserver') {
+                          sh "${scannerhome}/bin/sonar-scanner -X"
+                      }        
+                      timeout(time: 2, unit: 'MINUTES') {
+                          waitForQualityGate abortPipeline: true
+                      }
+                  }
+              }
               stage('build and install dependences') {
                     steps {
                       echo "THis is BUILD stage"
